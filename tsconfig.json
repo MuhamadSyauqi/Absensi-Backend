@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts", "src/app.js", "src/routes/ruteWs.ts", "src/routes/rutePegawai.js", "src/routes/ruteKehadiran.js", "src/models/karyawan.ts", "src/models/kodeqr.ts", "src/models/kehadiran.js", "src/middlewares/peranMw.js", "src/middlewares/otentikasiMw.js", "src/controllers/pegawaiCtr.js", "src/controllers/kehadiranCtr.js"],
+  "exclude": ["node_modules"]
+}
