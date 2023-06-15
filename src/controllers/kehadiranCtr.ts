@@ -60,7 +60,7 @@ export const absen = async (req: Request, res: Response) => {
     } else {
       // Membuat kehadiran baru
       const kehadiranBaru = new Kehadiran({
-        pegawai: karyawan._id,
+        karyawan: karyawan._id,
       });
       // Menyimpan kehadiran baru ke database
       dataKehadiran = await kehadiranBaru.save();

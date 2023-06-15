@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Karyawan from "../models/karyawan";
 import { broadcast } from "../routes/ruteWs";
+import karyawan from "../models/karyawan";
 
 const tambahData = async (nama: string, email: string, password: string, peran: string) => {
   const salt = await bcrypt.genSalt(10);
@@ -61,6 +62,8 @@ export const semuaKaryawan = async (req: Request, res: Response) => {
       .skip(skip)
       .limit(dataPerHalaman);
 
+    console.log(data);
+
     // Mengirimkan response dengan daftar karyawan, halaman saat ini, dan jumlah halaman
     res.status(200).json({ data, halaman, totalHalaman });
   } catch (error) {
@@ -110,5 +113,21 @@ export const profil = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Gagal mengambil data profil:", error);
     res.status(500).json({ message: "Gagal mengambil data profil" });
+  }
+}
+
+
+export const hapusKaryawan = async (req: Request, res: Response) => {
+  try {
+    const karyawan = await Karyawan.deleteOne( { email: req.params.email } );
+    console.log(req.params.email);
+    if (!karyawan) {
+      
+      return res.status(404).json({ message: "Data tidak ditemukan" });
+    }
+    return res.status(200).json({ message: "Data Berhasil Dihapus" })
+
+  } catch (error) {
+    console.error("gagal menghapus data") 
   }
 }
